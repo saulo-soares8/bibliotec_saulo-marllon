@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorias | BiblioTec</title>
+    <link rel="stylesheet" th:href="@{/css/categorias.css}">
 </head>
 <body>
 <h1>Categorias da biblioteca</h1>
+
+
+<p>
+    <a th:href="@{/categorias/nova}">Nova categoria</a>
+</p>
 
 <table border="1">
     <caption>Categorias cadastradas no BiblioTec</caption>
@@ -16,6 +22,7 @@
         <th>ID</th>
         <th>Nome</th>
         <th>Descrição</th>
+        <th>Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +30,20 @@
         <td th:text="${categoria.id}">1</td>
         <td th:text="${categoria.nome}">Nome de exemplo</td>
         <td th:text="${categoria.descricao}">Descrição de exemplo</td>
+
+        <td>
+            <a th:href="@{/categorias/{id}/editar(id=${categoria.id})}">
+                Editar
+            </a>
+
+            <form th:action="@{/categorias/{id}/excluir(id=${categoria.id})}"
+                  method="post"
+                  style="display: inline;"
+                  onsubmit="return confirm('Tem certeza que deseja excluir esta categoria?');">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>
