@@ -10,6 +10,9 @@
 <body>
 <h1>Categorias da biblioteca</h1>
 
+<p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
+    Mensagem de confirmação
+</p>
 
 <p>
     <a th:href="@{/categorias/nova}">Nova categoria</a>
@@ -30,7 +33,6 @@
         <td th:text="${categoria.id}">1</td>
         <td th:text="${categoria.nome}">Nome de exemplo</td>
         <td th:text="${categoria.descricao}">Descrição de exemplo</td>
-
         <td>
             <a th:href="@{/categorias/{id}/editar(id=${categoria.id})}">
                 Editar
@@ -43,7 +45,6 @@
                 <button type="submit">Excluir</button>
             </form>
         </td>
-
     </tr>
     </tbody>
 </table>

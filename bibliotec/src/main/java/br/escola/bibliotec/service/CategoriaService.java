@@ -18,10 +18,20 @@ public class CategoriaService {
     }
 
     public List<Categoria> listarTodas() {
+
         return categoriaRepository.findAll();
     }
     public Categoria salvar(Categoria categoria) {
+        categoria.setNome(categoria.getNome().trim());
         return categoriaRepository.save(categoria);
+    }
+    public boolean nomeJaExiste(Categoria categoria) {
+        String nome = categoria.getNome().trim();
+
+        return categoriaRepository.findByNomeIgnoreCase(nome)
+                .filter(categoriaEncontrada ->
+                        !categoriaEncontrada.getId().equals(categoria.getId()))
+                .isPresent();
     }
     public Optional<Categoria> buscarPorId(Long id) {
         return categoriaRepository.findById(id);
