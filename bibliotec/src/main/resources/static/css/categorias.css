@@ -1,38 +1,392 @@
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f5f5f5;
-    color: #333;
+/* =================================
+   BIBLIOTEC - TEMA COLORIDO 🪭
+   ================================= */
+
+:root {
+    --rosa: #ed5b9f;
+    --vermelho: #e96b78;
+    --laranja: #f49a50;
+    --amarelo: #e9bd43;
+    --verde: #45ad87;
+    --azul: #5299d5;
+    --roxo: #9168c9;
+
+    --texto: #343044;
+    --texto-suave: #777386;
+    --fundo: #f7f6fb;
+    --branco: #ffffff;
+    --borda: #eae7f0;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 25px;
-    border-radius: 8px;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background:
+            radial-gradient(circle at 95% 5%, #fce8f2 0, transparent 20%),
+            radial-gradient(circle at 5% 95%, #e9f3fc 0, transparent 22%),
+            var(--fundo);
+    color: var(--texto);
+}
+
+/* Layout principal */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Barra lateral */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    background: var(--branco);
+    border-right: 1px solid var(--borda);
+    box-shadow: 4px 0 18px rgba(60, 40, 90, .04);
+}
+
+.logo {
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.logo-icone {
+    display: block;
+    font-size: 43px;
+    margin-bottom: 8px;
+}
+
+.logo h2 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 800;
+    background: linear-gradient(
+            100deg,
+            var(--rosa),
+            var(--laranja),
+            var(--roxo),
+            var(--azul)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.logo p {
+    color: var(--texto-suave);
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.navegacao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 11px;
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: bold;
+    transition: .2s;
+}
+
+.nav-link:hover {
+    background: #fff0f6;
+    color: var(--rosa);
+    transform: translateX(3px);
+}
+
+.nav-link.ativo {
+    color: white;
+    background: linear-gradient(110deg, var(--rosa), var(--roxo));
+    box-shadow: 0 5px 12px rgba(145, 104, 201, .2);
+}
+
+.sidebar-rodape {
+    margin-top: auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.sidebar-rodape p {
+    color: var(--texto-suave);
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+
+.arco-iris {
+    height: 6px;
+    border-radius: 10px;
+    background: linear-gradient(
+            90deg,
+            var(--rosa),
+            var(--laranja),
+            var(--amarelo),
+            var(--verde),
+            var(--azul),
+            var(--roxo)
+    );
+}
+
+/* Conteúdo principal */
+
+.conteudo {
+    flex: 1;
+    min-width: 0;
+    padding: 40px;
+}
+
+.topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.subtitulo {
+    color: var(--roxo);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin: 8px 0;
+    font-size: 30px;
+    color: var(--texto);
+}
+
+.descricao {
+    margin: 0;
+    color: var(--texto-suave);
+}
+
+.linha-arco-iris {
+    height: 6px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 28px;
+    background: linear-gradient(
+            90deg,
+            var(--rosa) 0%,
+            var(--laranja) 25%,
+            var(--amarelo) 45%,
+            var(--verde) 65%,
+            var(--azul) 82%,
+            var(--roxo) 100%
+    );
+}
+
+/* Painéis */
+
+.painel {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-top: 4px solid var(--roxo);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 7px 24px rgba(70, 45, 100, .06);
+}
+
+.painel-topo h2 {
+    margin: 0 0 7px;
+    font-size: 21px;
+}
+
+.painel-topo p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+/* Botões */
+
+.botao {
+    display: inline-block;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 9px;
+    text-decoration: none;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    transition: .2s;
+}
+
+.botao:hover {
+    transform: translateY(-2px);
+    filter: brightness(.96);
+}
+
+.botao-principal {
+    color: white;
+    background: linear-gradient(110deg, var(--rosa), var(--roxo));
+    box-shadow: 0 4px 10px rgba(145, 104, 201, .18);
+}
+
+.botao-limpar {
+    background: #f0ebf8;
+    color: var(--roxo);
+}
+
+.botao-editar {
+    color: #2874b8;
+    background: #e5f2fc;
+}
+
+.botao-excluir {
+    color: #cf5364;
+    background: #fff0f2;
+}
+
+.botao-secundario {
+    color: white;
+    background: var(--azul);
+}
+
+/* Pesquisa */
+
+.busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.busca input {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px 15px;
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    font: inherit;
+    outline: none;
+    background: #fdfcff;
+}
+
+.busca input:focus {
+    border-color: var(--roxo);
+    box-shadow: 0 0 0 3px rgba(145, 104, 201, .12);
+}
+
+/* Tabela */
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background: white;
+    font-size: 13px;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+caption {
+    padding: 10px;
+    color: var(--texto-suave);
     text-align: left;
 }
 
 th {
-    background-color: #e8e8e8;
+    padding: 15px 12px;
+    text-align: left;
+    color: white;
+    background: linear-gradient(110deg, #d95796, #8462bd);
+    white-space: nowrap;
 }
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--borda);
+}
+
+tbody tr:nth-child(even) {
+    background: #fcfaff;
+}
+
+tbody tr:hover {
+    background: #fff1f7;
+}
+
+.titulo-livro {
+    font-weight: bold;
+    color: #51436c;
+}
+
+.categoria-tag {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: #7953ae;
+    background: #f0e9fc;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.quantidade {
+    color: var(--verde);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.acoes-tabela {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.acoes-tabela form {
+    display: inline;
+}
+
+/* Mensagens */
+
+.mensagem {
+    margin: 0 0 20px;
+    padding: 14px 18px;
+    border-radius: 9px;
+    color: #267b50;
+    background: #e6f8ed;
+    border-left: 5px solid var(--verde);
+}
+
+.mensagem.mensagem-erro {
+    color: #b3402a;
+    background: #fdf1ef;
+    border-left-color: var(--vermelho);
+}
+
+.vazio {
+    padding: 25px;
+    text-align: center;
+    color: var(--roxo);
+    background: #f7f0ff;
+    border-radius: 10px;
+}
+
+/* Formulários */
 
 .formulario {
     display: flex;
@@ -47,13 +401,36 @@ th {
 }
 
 .formulario input,
-.formulario textarea {
+.formulario textarea,
+.formulario select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid var(--borda);
+    border-radius: 9px;
     box-sizing: border-box;
     font: inherit;
+    background: white;
+}
+
+.formulario input:focus,
+.formulario textarea:focus,
+.formulario select:focus {
+    outline: none;
+    border-color: var(--roxo);
+    box-shadow: 0 0 0 3px rgba(145, 104, 201, .12);
+}
+
+.erro {
+    margin: 5px 0 0;
+    color: var(--vermelho);
+    font-size: 13px;
+}
+
+.formulario input.campo-erro,
+.formulario textarea.campo-erro,
+.formulario select.campo-erro {
+    border-color: var(--vermelho);
+    background: #fff5f5;
 }
 
 .acoes {
@@ -62,96 +439,110 @@ th {
     gap: 12px;
 }
 
-.botao {
-    display: inline-block;
-    padding: 10px 16px;
-    background-color: #245a81;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    font: inherit;
+/* Rodapé */
+
+.rodape {
+    margin-top: 30px;
+    padding: 18px;
+    text-align: center;
+    color: var(--texto-suave);
+    font-size: 14px;
 }
 
-.botao:hover {
-    background-color: #194361;
+/* Responsividade */
+
+@media (max-width: 850px) {
+    .sidebar {
+        width: 190px;
+        padding: 20px 12px;
+    }
+
+    .conteudo {
+        padding: 25px 18px;
+    }
+
+    .topo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
-.botao-secundario {
-    background-color: #666;
+@media (max-width: 600px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .logo {
+        padding-bottom: 10px;
+    }
+
+    .navegacao {
+        flex-direction: row;
+        margin-top: 10px;
+    }
+
+    .nav-link {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .sidebar-rodape {
+        display: none;
+    }
+
+    .conteudo {
+        padding: 20px 12px;
+    }
+
+    .busca {
+        flex-wrap: wrap;
+    }
+
+    .busca input {
+        flex-basis: 100%;
+    }
+
+    .acoes-tabela {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
-.botao-secundario:hover {
-    background-color: #444;
-}
-
-.erro {
-    margin: .3rem 0 0;
-    color: #b3402a;
-    font-size: .9rem;
-}
-
-.formulario input.campo-erro,
-.formulario textarea.campo-erro {
-    border-color: #b3402a;
-    background: #fdf1ef;
-}
-
-.mensagem {
-    width: min(920px, 92%);
-    margin: 0 auto 1rem;
-    padding: .7rem 1rem;
-    color: #245a81;
-    background: #dcebd2;
-    border-left: 6px solid #5b9b65;
-}
-
-/* Mensagem de erro ao tentar excluir categoria */
-.mensagem.mensagem-erro {
-    color: #b3402a;
-    background: #fdf1ef;
-    border-left-color: #b3402a;
-}
-
-/* Campos numéricos e lista de categorias */
-.formulario input[type=number],
-.formulario select {
-    width: 100%;
-    padding: .55rem;
-    font: inherit;
-    border: 2px solid #ccc;
-    background: #fff;
-    box-sizing: border-box;
-}
-
-.formulario select.campo-erro {
-    border-color: #b3402a;
-    background: #fdf1ef;
-}
-
-/* Barra de pesquisa de livros */
-.busca {
+/* Menu de navegação (fragment menu) */
+.menu {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
-    margin: 20px 0;
+    padding: 12px 20px;
+    background: var(--branco);
+    border-bottom: 1px solid var(--borda);
 }
 
-.busca input {
-    flex: 1;
-    min-width: 150px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font: inherit;
-    box-sizing: border-box;
+.menu a {
+    padding: 10px 18px;
+    color: var(--texto);
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 9px;
+    font-weight: bold;
+    transition: .2s;
 }
 
-/* Mensagem quando nenhum livro é encontrado */
-.vazio {
-    padding: 15px;
-    background-color: white;
-    border-left: 5px solid #245a81;
-    color: #555;
+.menu a:hover {
+    color: var(--roxo);
+    border-color: var(--roxo);
 }
+
+.menu a.ativo {
+    color: white;
+    background: linear-gradient(110deg, var(--rosa), var(--roxo));
+    border-color: transparent;
+}
+

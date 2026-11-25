@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabeca('Categorias')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: menu('categorias')}"></nav>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icone">📚</span>
+            <h2>BiblioTec</h2>
+            <p>Biblioteca digital</p>
+        </div>
+
+        <nav class="navegacao">
+            <a th:href="@{/livros}" class="nav-link">
+                <span>📖</span> Livros
+            </a>
+
+            <a th:href="@{/categorias}" class="nav-link ativo">
+                <span>🏷️</span> Categorias
+            </a>
+        </nav>
+
+        <div class="sidebar-rodape">
+            <div class="arco-iris"></div>
+            <p>🪭 🪭 🪭</p>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <header class="topo">
+            <div>
+                <p class="subtitulo">BIBLIOTECA DIGITAL</p>
+
+                <h1 th:text="${categoria.id == null ? 'Nova categoria 🪭' : 'Editar categoria 🪭'}">
+                    Nova categoria
+                </h1>
+
+                <p class="descricao">
+                    Preencha os dados para organizar os livros.
+                </p>
+            </div>
+        </header>
+
+        <div class="linha-arco-iris"></div>
+
+        <section class="painel">
+
+            <div class="painel-topo">
+                <h2>Dados da categoria</h2>
+                <p>Informe o nome e a descrição da categoria.</p>
+            </div>
+
+            <form class="formulario"
+                  th:action="@{/categorias}"
+                  th:object="${categoria}"
+                  method="post">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div>
+                    <label for="nome">Nome da categoria</label>
+
+                    <input type="text"
+                           id="nome"
+                           th:field="*{nome}"
+                           placeholder="Ex.: Literatura"
+                           maxlength="60"
+                           required
+                           th:classappend="${#fields.hasErrors('nome')} ? 'campo-erro'">
+
+                    <p class="erro"
+                       th:if="${#fields.hasErrors('nome')}"
+                       th:errors="*{nome}">
+                        Erro no nome
+                    </p>
+                </div>
+
+                <div>
+                    <label for="descricao">Descrição</label>
+
+                    <textarea id="descricao"
+                              th:field="*{descricao}"
+                              rows="4"
+                              maxlength="255"
+                              placeholder="Descreva esta categoria..."></textarea>
+
+                    <p class="erro"
+                       th:if="${#fields.hasErrors('descricao')}"
+                       th:errors="*{descricao}">
+                        Erro na descrição
+                    </p>
+                </div>
+
+                <div class="acoes">
+                    <button type="submit" class="botao botao-principal">
+                        Salvar categoria
+                    </button>
+
+                    <a th:href="@{/categorias}" class="botao botao-limpar">
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
+
+        </section>
+
+        <footer class="rodape">
+            BiblioTec · 🪭 📚 🪭
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>

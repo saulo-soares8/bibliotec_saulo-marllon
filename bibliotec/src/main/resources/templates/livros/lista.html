@@ -1,83 +1,155 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livros | BiblioTec</title>
-    <link rel="stylesheet" th:href="@{/css/categorias.css}">
-</head>
+<head th:replace="~{fragments/layout :: cabeca('Livros')}"></head>
 <body>
 
-<h1>Livros da biblioteca</h1>
+<nav th:replace="~{fragments/layout :: menu('livros')}"></nav>
 
-<p class="barra">
-    <a class="botao" th:href="@{/livros/novo}">Novo livro</a>
-    <a class="botao botao-secundario" th:href="@{/categorias}">Categorias</a>
-</p>
+<div class="layout">
 
-<p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
-    Mensagem
-</p>
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icone">📚</span>
+            <h2>BiblioTec</h2>
+            <p>Biblioteca digital</p>
+        </div>
 
-<form class="busca" method="get" th:action="@{/livros}">
-    <input type="text"
-           name="titulo"
-           placeholder="Digite o título do livro"
-           th:value="${titulo}">
-
-    <button type="submit" class="botao">Buscar</button>
-    <a class="botao botao-secundario" th:href="@{/livros}">Limpar</a>
-</form>
-
-<p class="vazio" th:if="${#lists.isEmpty(livros)}">
-    Nenhum livro encontrado.
-</p>
-
-<table th:unless="${#lists.isEmpty(livros)}">
-    <caption>Livros cadastrados no BiblioTec</caption>
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Título</th>
-        <th scope="col">Autor</th>
-        <th scope="col">ISBN</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Disponíveis</th>
-        <th scope="col">Ações</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:each="livro : ${livros}">
-        <td th:text="${livro.id}">1</td>
-        <td th:text="${livro.titulo}">Título de exemplo</td>
-        <td th:text="${livro.autor}">Autor de exemplo</td>
-        <td th:text="${livro.isbn}">9780000000000</td>
-        <td th:text="${livro.categoria.nome}">Categoria</td>
-        <td th:text="|${livro.quantidadeDisponivel} de ${livro.quantidadeTotal}|">
-            3 de 3
-        </td>
-        <td>
-            <a class="botao"
-               th:href="@{/livros/{id}/editar(id=${livro.id})}">
-                Editar
+        <nav class="navegacao">
+            <a th:href="@{/livros}" class="nav-link ativo">
+                <span>📖</span> Livros
             </a>
 
-            <form method="post"
-                  th:action="@{/livros/{id}/excluir(id=${livro.id})}"
-                  th:attr="data-titulo=${livro.titulo}"
-                  onsubmit="return confirmarExclusao(this)"
-                  style="display: inline;">
+            <a th:href="@{/categorias}" class="nav-link">
+                <span>🏷️</span> Categorias
+            </a>
+        </nav>
 
-                <button type="submit" class="botao botao-secundario">
-                    Excluir
+        <div class="sidebar-rodape">
+            <div class="arco-iris"></div>
+            <p>🪭 🪭 🪭</p>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <header class="topo">
+            <div>
+                <p class="subtitulo">BIBLIOTECA DIGITAL</p>
+                <h1>Livros da biblioteca 🪭</h1>
+                <p class="descricao">
+                    Organize, encontre e descubra novas histórias.
+                </p>
+            </div>
+
+            <a class="botao botao-principal" th:href="@{/livros/novo}">
+                + Novo livro
+            </a>
+        </header>
+
+        <div class="linha-arco-iris"></div>
+
+        <p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
+            Mensagem
+        </p>
+
+        <section class="painel">
+
+            <div class="painel-topo">
+                <div>
+                    <h2>Acervo de livros</h2>
+                    <p>Consulte os livros cadastrados no sistema.</p>
+                </div>
+            </div>
+
+            <form class="busca" method="get" th:action="@{/livros}">
+                <input type="text"
+                       name="titulo"
+                       placeholder="🔎 Digite o título do livro..."
+                       th:value="${titulo}">
+
+                <button type="submit" class="botao botao-principal">
+                    Buscar
                 </button>
+
+                <a class="botao botao-limpar" th:href="@{/livros}">
+                    Limpar
+                </a>
             </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+            <p class="vazio" th:if="${#lists.isEmpty(livros)}">
+                📚 Nenhum livro encontrado.
+            </p>
+
+            <div class="tabela-container"
+                 th:unless="${#lists.isEmpty(livros)}">
+
+                <table>
+                    <caption>Livros cadastrados no BiblioTec</caption>
+
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Disponíveis</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="livro : ${livros}">
+                        <td th:text="${livro.id}">1</td>
+                        <td class="titulo-livro" th:text="${livro.titulo}">
+                            Título de exemplo
+                        </td>
+                        <td th:text="${livro.autor}">Autor de exemplo</td>
+                        <td th:text="${livro.isbn}">9780000000000</td>
+                        <td>
+                            <span class="categoria-tag"
+                                  th:text="${livro.categoria.nome}">
+                                Categoria
+                            </span>
+                        </td>
+                        <td>
+                            <span class="quantidade"
+                                  th:text="|${livro.quantidadeDisponivel} de ${livro.quantidadeTotal}|">
+                                3 de 3
+                            </span>
+                        </td>
+                        <td>
+                            <div class="acoes-tabela">
+                                <a class="botao botao-editar"
+                                   th:href="@{/livros/{id}/editar(id=${livro.id})}">
+                                    Editar
+                                </a>
+
+                                <form method="post"
+                                      th:action="@{/livros/{id}/excluir(id=${livro.id})}"
+                                      th:attr="data-titulo=${livro.titulo}"
+                                      onsubmit="return confirmarExclusao(this)">
+
+                                    <button type="submit" class="botao botao-excluir">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <footer class="rodape">
+            BiblioTec · 🪭 📚 🪭
+        </footer>
+
+    </main>
+</div>
 
 <script>
     function confirmarExclusao(formulario) {

@@ -1,12 +1,41 @@
 
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>BiblioTec</title>
-</head>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabeca('Início')}"></head>
 <body>
-<h1>BiblioTec</h1>
-<p>Sistema de empréstimos da biblioteca escolar em construção.</p>
+
+<nav th:replace="~{fragments/layout :: menu('inicio')}"></nav>
+
+<div class="layout">
+    <main class="conteudo">
+
+        <header class="topo">
+            <div>
+                <p class="subtitulo">BIBLIOTECA DIGITAL</p>
+                <h1>BiblioTec 🪭</h1>
+                <p class="descricao">
+                    Sistema de empréstimos da biblioteca escolar em construção.
+                </p>
+            </div>
+        </header>
+
+        <div class="linha-arco-iris"></div>
+
+        <section class="painel">
+            <div class="painel-topo">
+                <h2>Bem-vindo ao BiblioTec!</h2>
+                <p>
+                    Gerencie livros, categorias e leitores em um só lugar.
+                </p>
+            </div>
+        </section>
+
+        <footer class="rodape">
+            BiblioTec · 🪭 📚 🪭
+        </footer>
+
+    </main>
+</div>
+
 </body>
 </html>

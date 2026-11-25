@@ -1,56 +1,141 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias | BiblioTec</title>
-    <link rel="stylesheet" th:href="@{/css/categorias.css}">
-</head>
+<head th:replace="~{fragments/layout :: cabeca('Categorias')}"></head>
 <body>
-<h1>Categorias da biblioteca</h1>
 
-<p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
-    Mensagem de confirmação
-</p>
+<nav th:replace="~{fragments/layout :: menu('categorias')}"></nav>
 
-<p class="mensagem mensagem-erro" th:if="${erro}" th:text="${erro}">
-    Mensagem de erro
-</p>
+<div class="layout">
 
-<p>
-    <a th:href="@{/categorias/nova}">Nova categoria</a>
-</p>
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icone">📚</span>
+            <h2>BiblioTec</h2>
+            <p>Biblioteca digital</p>
+        </div>
 
-<table border="1">
-    <caption>Categorias cadastradas no BiblioTec</caption>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="categoria : ${categorias}">
-        <td th:text="${categoria.id}">1</td>
-        <td th:text="${categoria.nome}">Nome de exemplo</td>
-        <td th:text="${categoria.descricao}">Descrição de exemplo</td>
-        <td>
-            <a th:href="@{/categorias/{id}/editar(id=${categoria.id})}">
-                Editar
+        <nav class="navegacao">
+            <a th:href="@{/livros}" class="nav-link">
+                <span>📖</span> Livros
             </a>
 
-            <form th:action="@{/categorias/{id}/excluir(id=${categoria.id})}"
-                  method="post"
-                  style="display: inline;"
-                  onsubmit="return confirm('Tem certeza que deseja excluir esta categoria?');">
-                <button type="submit">Excluir</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            <a th:href="@{/categorias}" class="nav-link ativo">
+                <span>🏷️</span> Categorias
+            </a>
+        </nav>
+
+        <div class="sidebar-rodape">
+            <div class="arco-iris"></div>
+            <p>🪭 🪭 🪭</p>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <header class="topo">
+            <div>
+                <p class="subtitulo">BIBLIOTECA DIGITAL</p>
+                <h1>Categorias da biblioteca 🪭</h1>
+                <p class="descricao">
+                    Organize os livros por assuntos e categorias.
+                </p>
+            </div>
+
+            <a class="botao botao-principal" th:href="@{/categorias/nova}">
+                + Nova categoria
+            </a>
+        </header>
+
+        <div class="linha-arco-iris"></div>
+
+        <p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
+            Mensagem de confirmação
+        </p>
+
+        <p class="mensagem mensagem-erro"
+           th:if="${erro}"
+           th:text="${erro}">
+            Mensagem de erro
+        </p>
+
+        <section class="painel">
+
+            <div class="painel-topo">
+                <div>
+                    <h2>Organização por categorias</h2>
+                    <p>Consulte e gerencie as categorias cadastradas.</p>
+                </div>
+            </div>
+
+            <p class="vazio" th:if="${#lists.isEmpty(categorias)}">
+                🏷️ Nenhuma categoria cadastrada.
+            </p>
+
+            <div class="tabela-container"
+                 th:unless="${#lists.isEmpty(categorias)}">
+
+                <table>
+                    <caption>Categorias cadastradas no BiblioTec</caption>
+
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="categoria : ${categorias}">
+                        <td th:text="${categoria.id}">1</td>
+
+                        <td>
+                            <span class="categoria-tag"
+                                  th:text="${categoria.nome}">
+                                Nome de exemplo
+                            </span>
+                        </td>
+
+                        <td th:text="${categoria.descricao}">
+                            Descrição de exemplo
+                        </td>
+
+                        <td>
+                            <div class="acoes-tabela">
+
+                                <a class="botao botao-editar"
+                                   th:href="@{/categorias/{id}/editar(id=${categoria.id})}">
+                                    Editar
+                                </a>
+
+                                <form th:action="@{/categorias/{id}/excluir(id=${categoria.id})}"
+                                      method="post"
+                                      onsubmit="return confirm('Tem certeza que deseja excluir esta categoria?');">
+
+                                    <button type="submit"
+                                            class="botao botao-excluir">
+                                        Excluir
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+        <footer class="rodape">
+            BiblioTec · 🪭 📚 🪭
+        </footer>
+
+    </main>
+</div>
+
 </body>
 </html>

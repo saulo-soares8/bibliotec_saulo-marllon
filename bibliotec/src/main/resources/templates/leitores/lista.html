@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabeca('Leitores')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: menu('leitores')}"></nav>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icone">🪭</span>
+            <h2>BiblioTec</h2>
+            <p>Sistema de biblioteca escolar</p>
+        </div>
+
+        <div class="sidebar-rodape">
+            <p>🪭 📚 🪭</p>
+        </div>
+    </aside>
+
+    <main class="conteudo">
+
+        <header class="topo">
+            <div>
+                <p class="subtitulo">GERENCIAMENTO</p>
+                <h1>Leitores</h1>
+                <p class="descricao">Consulte e gerencie os leitores cadastrados.</p>
+            </div>
+
+            <a th:href="@{/leitores/novo}" class="botao botao-principal">
+                + Novo leitor
+            </a>
+        </header>
+
+        <div class="linha-arco-iris"></div>
+
+        <div th:if="${sucesso}" class="mensagem" th:text="${sucesso}"></div>
+        <div th:if="${erro}" class="mensagem mensagem-erro" th:text="${erro}"></div>
+
+        <section class="painel">
+            <div class="painel-topo">
+                <h2>Lista de leitores</h2>
+                <p>Leitores cadastrados no sistema.</p>
+            </div>
+
+            <div class="tabela-container" th:if="${not #lists.isEmpty(leitores)}">
+                <table>
+                    <caption>Leitores cadastrados em ordem alfabética.</caption>
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>E-mail</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="leitor : ${leitores}">
+                        <td class="titulo-livro" th:text="${leitor.nome}"></td>
+                        <td th:text="${leitor.matricula}"></td>
+                        <td th:text="${leitor.email != null ? leitor.email : '-'}"></td>
+                        <td>
+                            <span class="categoria-tag" th:text="${leitor.tipo.rotulo}"></span>
+                        </td>
+                        <td>
+                            <div class="acoes-tabela">
+                                <a th:href="@{/leitores/{id}/editar(id=${leitor.id})}"
+                                   class="botao botao-editar">
+                                    Editar
+                                </a>
+
+                                <form th:action="@{/leitores/{id}/excluir(id=${leitor.id})}"
+                                      method="post"
+                                      onsubmit="return confirm('Tem certeza que deseja excluir este leitor?');">
+                                    <button type="submit" class="botao botao-excluir">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${#lists.isEmpty(leitores)}" class="vazio">
+                Nenhum leitor cadastrado.
+            </div>
+        </section>
+
+        <footer class="rodape">
+            BiblioTec · 🪭 📚 🪭
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>
