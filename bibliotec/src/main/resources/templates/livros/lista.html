@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros | BiblioTec</title>
+    <link rel="stylesheet" th:href="@{/css/categorias.css}">
+</head>
+<body>
+
+<h1>Livros da biblioteca</h1>
+
+<p class="barra">
+    <a class="botao" th:href="@{/livros/novo}">Novo livro</a>
+    <a class="botao botao-secundario" th:href="@{/categorias}">Categorias</a>
+</p>
+
+<p class="mensagem" th:if="${mensagem}" th:text="${mensagem}">
+    Mensagem
+</p>
+
+<form class="busca" method="get" th:action="@{/livros}">
+    <input type="text"
+           name="titulo"
+           placeholder="Digite o título do livro"
+           th:value="${titulo}">
+
+    <button type="submit" class="botao">Buscar</button>
+    <a class="botao botao-secundario" th:href="@{/livros}">Limpar</a>
+</form>
+
+<p class="vazio" th:if="${#lists.isEmpty(livros)}">
+    Nenhum livro encontrado.
+</p>
+
+<table th:unless="${#lists.isEmpty(livros)}">
+    <caption>Livros cadastrados no BiblioTec</caption>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Título</th>
+        <th scope="col">Autor</th>
+        <th scope="col">ISBN</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Disponíveis</th>
+        <th scope="col">Ações</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="livro : ${livros}">
+        <td th:text="${livro.id}">1</td>
+        <td th:text="${livro.titulo}">Título de exemplo</td>
+        <td th:text="${livro.autor}">Autor de exemplo</td>
+        <td th:text="${livro.isbn}">9780000000000</td>
+        <td th:text="${livro.categoria.nome}">Categoria</td>
+        <td th:text="|${livro.quantidadeDisponivel} de ${livro.quantidadeTotal}|">
+            3 de 3
+        </td>
+        <td>
+            <a class="botao"
+               th:href="@{/livros/{id}/editar(id=${livro.id})}">
+                Editar
+            </a>
+
+            <form method="post"
+                  th:action="@{/livros/{id}/excluir(id=${livro.id})}"
+                  th:attr="data-titulo=${livro.titulo}"
+                  onsubmit="return confirmarExclusao(this)"
+                  style="display: inline;">
+
+                <button type="submit" class="botao botao-secundario">
+                    Excluir
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    function confirmarExclusao(formulario) {
+        const titulo = formulario.dataset.titulo;
+
+        return confirm('Tem certeza que deseja excluir o livro "' + titulo + '"?');
+    }
+</script>
+
+</body>
+</html>

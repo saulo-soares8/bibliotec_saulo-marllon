@@ -106,3 +106,52 @@ th {
     background: #dcebd2;
     border-left: 6px solid #5b9b65;
 }
+
+/* Mensagem de erro ao tentar excluir categoria */
+.mensagem.mensagem-erro {
+    color: #b3402a;
+    background: #fdf1ef;
+    border-left-color: #b3402a;
+}
+
+/* Campos numéricos e lista de categorias */
+.formulario input[type=number],
+.formulario select {
+    width: 100%;
+    padding: .55rem;
+    font: inherit;
+    border: 2px solid #ccc;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.formulario select.campo-erro {
+    border-color: #b3402a;
+    background: #fdf1ef;
+}
+
+/* Barra de pesquisa de livros */
+.busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.busca input {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+/* Mensagem quando nenhum livro é encontrado */
+.vazio {
+    padding: 15px;
+    background-color: white;
+    border-left: 5px solid #245a81;
+    color: #555;
+}

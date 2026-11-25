@@ -14,6 +14,10 @@
     Mensagem de confirmação
 </p>
 
+<p class="mensagem mensagem-erro" th:if="${erro}" th:text="${erro}">
+    Mensagem de erro
+</p>
+
 <p>
     <a th:href="@{/categorias/nova}">Nova categoria</a>
 </p>
