@@ -83,4 +83,30 @@ public class EmprestimoService {
 
         emprestimoRepository.save(emprestimo);
     }
+
+    // RN04: devolver empréstimo e repor o estoque
+    @Transactional
+    public void devolver(Long emprestimoId) {
+
+        Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId)
+                .orElseThrow(() ->
+                        new RegraNegocioException("Empréstimo não encontrado"));
+
+        if (emprestimo.getStatus() == StatusEmprestimo.DEVOLVIDO) {
+            throw new RegraNegocioException(
+                    "Este empréstimo já foi devolvido");
+        }
+
+        Livro livro = emprestimo.getLivro();
+
+        livro.setQuantidadeDisponivel(
+                livro.getQuantidadeDisponivel() + 1);
+
+        livroRepository.save(livro);
+
+        emprestimo.setDataDevolucao(LocalDate.now());
+        emprestimo.setStatus(StatusEmprestimo.DEVOLVIDO);
+
+        emprestimoRepository.save(emprestimo);
+    }
 }

@@ -66,6 +66,27 @@ public class EmprestimoController {
         }
     }
 
+    // RN04: registrar a devolução
+    @PostMapping("/{id}/devolver")
+    public String devolver(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            emprestimoService.devolver(id);
+
+            redirectAttributes.addFlashAttribute(
+                    "mensagem", "Devolução registrada com sucesso!");
+
+        } catch (RegraNegocioException e) {
+
+            redirectAttributes.addFlashAttribute(
+                    "erro", e.getMessage());
+        }
+
+        return "redirect:/emprestimos";
+    }
+
     private void carregarOpcoes(Model model) {
         model.addAttribute("livros", livroService.listarTodos());
         model.addAttribute("leitores", leitorService.listarTodos());

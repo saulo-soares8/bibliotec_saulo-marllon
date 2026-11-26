@@ -38,11 +38,28 @@
             <td th:text="${e.id}"></td>
             <td th:text="${e.livro.titulo}"></td>
             <td th:text="${e.leitor.nome}"></td>
+
             <td th:text="${#temporals.format(e.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+
             <td th:text="${#temporals.format(e.dataPrevistaDevolucao, 'dd/MM/yyyy')}"></td>
+
             <td th:text="${e.dataDevolucao != null ? #temporals.format(e.dataDevolucao, 'dd/MM/yyyy') : '—'}"></td>
+
             <td th:text="${e.status.rotulo}"></td>
-            <td></td>
+
+            <td>
+                <form th:if="${e.status.name() == 'ATIVO'}"
+                      th:action="@{/emprestimos/{id}/devolver(id=${e.id})}"
+                      method="post">
+
+                    <button type="submit">Devolver</button>
+
+                </form>
+
+                <span th:if="${e.status.name() == 'DEVOLVIDO'}">
+                    Já devolvido
+                </span>
+            </td>
         </tr>
         </tbody>
     </table>
