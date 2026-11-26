@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabeca('Empréstimos')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: menu('emprestimos')}"></nav>
+
+<main class="container">
+
+    <h1>Empréstimos</h1>
+
+    <a th:href="@{/emprestimos/novo}" class="botao">Novo empréstimo</a>
+
+    <p th:if="${mensagem}" th:text="${mensagem}"></p>
+    <p class="erro" th:if="${erro}" th:text="${erro}"></p>
+
+    <p th:if="${#lists.isEmpty(emprestimos)}">
+        Nenhum empréstimo registrado.
+    </p>
+
+    <table th:if="${!#lists.isEmpty(emprestimos)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Livro</th>
+            <th>Leitor</th>
+            <th>Emprestado em</th>
+            <th>Devolução prevista</th>
+            <th>Devolvido em</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="e : ${emprestimos}">
+            <td th:text="${e.id}"></td>
+            <td th:text="${e.livro.titulo}"></td>
+            <td th:text="${e.leitor.nome}"></td>
+            <td th:text="${#temporals.format(e.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(e.dataPrevistaDevolucao, 'dd/MM/yyyy')}"></td>
+            <td th:text="${e.dataDevolucao != null ? #temporals.format(e.dataDevolucao, 'dd/MM/yyyy') : '—'}"></td>
+            <td th:text="${e.status.rotulo}"></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+</main>
+
+</body>
+</html>

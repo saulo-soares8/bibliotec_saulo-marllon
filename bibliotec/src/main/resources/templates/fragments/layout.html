@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="cabeca(titulo)">
@@ -7,13 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/categorias.css}">
 </head>
 <body>
-
 <nav class="menu" th:fragment="menu(ativo)">
     <a th:href="@{/}" th:classappend="${ativo == 'inicio'} ? 'ativo'">Início</a>
     <a th:href="@{/categorias}" th:classappend="${ativo == 'categorias'} ? 'ativo'">Categorias</a>
     <a th:href="@{/livros}" th:classappend="${ativo == 'livros'} ? 'ativo'">Livros</a>
     <a th:href="@{/leitores}" th:classappend="${ativo == 'leitores'} ? 'ativo'">Leitores</a>
+    <a th:href="@{/emprestimos}" th:classappend="${ativo == 'emprestimos'} ? 'ativo'">Empréstimos</a>
 </nav>
-
 </body>
 </html>

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: cabeca('Novo empréstimo')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: menu('emprestimos')}"></nav>
+
+<main class="container">
+    <h1>Novo empréstimo</h1>
+
+    <form class="formulario" th:action="@{/emprestimos}" method="post">
+
+        <p class="erro" th:if="${erro}" th:text="${erro}">
+            Mensagem da regra de negócio
+        </p>
+
+        <label for="livroId">Livro</label>
+        <select id="livroId" name="livroId" required>
+            <option value="">Selecione um livro</option>
+            <option th:each="l : ${livros}"
+                    th:value="${l.id}"
+                    th:selected="${l.id == livroId}"
+                    th:text="${l.titulo + ' — disponíveis: ' + l.quantidadeDisponivel}">
+            </option>
+        </select>
+
+        <label for="leitorId">Leitor</label>
+        <select id="leitorId" name="leitorId" required>
+            <option value="">Selecione um leitor</option>
+            <option th:each="l : ${leitores}"
+                    th:value="${l.id}"
+                    th:selected="${l.id == leitorId}"
+                    th:text="${l.nome + ' (' + l.matricula + ')'}">
+            </option>
+        </select>
+
+        <button type="submit">Emprestar</button>
+
+        <a th:href="@{/emprestimos}">Cancelar</a>
+
+    </form>
+</main>
+
+</body>
+</html>
